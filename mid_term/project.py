@@ -3,11 +3,19 @@ def main():
         code = input("\nEnter customer code: ")
         if code == "r" or code == "R" or code == "c" or code == "C" or code == "i" or code == "I":
             beg_m = input("Enter beginning meter reading: ")
-            if int(beg_m) < 0:
+            try:
+                if int(beg_m) < 0 or int(beg_m) > 999999999:
+                    print("Invalid meter reading")
+                    main()
+            except:
                 print("Invalid meter reading")
                 main()
             end_m = input("Enter ending meter reading: ")
-            if int(end_m) < 0:
+            try:
+                if int(end_m) < 0 or int(beg_m) > 999999999:
+                    print("Invalid meter reading")
+                    main()
+            except:
                 print("Invalid meter reading")
                 main()
             if end_m > beg_m:
@@ -24,7 +32,7 @@ def main():
                 gal = gallons - 4000000
                 if gallons <= 4000000:
                     bills = f"${format(1000, '.2f')}"
-                elif gallons >= 4000000:
+                elif gallons > 4000000:
                     bill = 1000 + (0.00025 * gal)
                     bills = f"${format(bill, '.2f')}"
             elif code == "i" or code == "I":
@@ -32,9 +40,9 @@ def main():
                 gal = gallons - 10000000
                 if gallons <= 4000000:
                     bills = f"${format(1000, '.2f')}"
-                elif gallons >= 4000000 and gallons <= 10000000:
+                elif gallons > 4000000 and gallons <= 10000000:
                     bills = f"${format(2000, '.2f')}"
-                elif gallons >= 10000000:
+                elif gallons > 10000000:
                     bill = 2000 + (0.00025 * gal)
                     bills = f"${format(bill, '.2f')}"
             print("\nCustomer code: ", code)
@@ -43,6 +51,8 @@ def main():
             print("Gallons of water used: ", gallons)
             print("Amount billed: ", bills)
         else:
-            quit()
+            print("Invalid user code")
+            print("Enter a valid user code")
+            main()
 
 main()
